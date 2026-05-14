@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Sidebar from './components/Sidebar'
 
 function App() {
 
@@ -9,16 +10,7 @@ function App() {
     <div className="min-h-screen bg-zinc-100 text-zinc-900 flex">
 
       {/* Sidebar */}
-      <aside className="w-64 bg-zinc-200 border-r border-zinc-300 p-4 flex flex-col">
-        <h1 className="text-2xl font-bold mb-6">
-          Notes App
-        </h1>
-
-        <button className="bg-zinc-900 text-white py-2 rounded-xl font-semibold hover:opacity-90 transition">
-          + Add Note
-        </button>
-      </aside>
-
+      <Sidebar/>
       {/* Notes Section */}
       <main className="flex-1 p-6">
         <h2 className="text-3xl font-bold mb-6">
