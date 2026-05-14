@@ -1263,7 +1263,24 @@
     		}
     	},
     	likes: {
-    	}
+    	},
+        node:{
+             "node_1":{
+    "_id": "node_1",
+    "title": "React",
+    "content":"React (also known as React.js or ReactJS) is a free and open-source front-end JavaScript library that aims to make building user interfaces based on components more seamless"
+  },
+   "node_2":{
+    "_id": "node_2",
+    "title": "JavaScript",
+    "content":"JavaScript is a browser-based programming language that brings interactivity to static web pages, applications and more. "
+  },
+  "node_3":{
+    "_id": "node_3",
+    "title": "Tailwind CSS",
+    "content":"Tailwind CSS is a utility-first CSS framework that provides low-level utility classes to build custom designs without leaving your HTML. "
+  }
+        }
     };
     var settings = {
     	identity: identity,
