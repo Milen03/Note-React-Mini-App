@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
 import nodeServices from "../services/nodeServices"
+
 import NoteCart from "./NoteCart"
+import Sidebar from "./Sidebar"
 
 export default function NotesSection(){
 
     const [notes,setNotes] = useState([])
+
 
     useEffect(()=>{
         nodeServices.getAll()
@@ -13,8 +16,22 @@ export default function NotesSection(){
         })
     },[])
 
+    const saveCreateNodeClickHandler = async (e) =>{
+        e.preventDefault()
+
+        const formData = new FormData(e.target)
+        const noteData = Object.fromEntries(formData)
+
+        const newNote = await nodeServices.create(noteData)
+
+        setNotes(state =>[...state,newNote])
+
+    }
+
     return (
         <>
+        <Sidebar
+        onSave={saveCreateNodeClickHandler}/>
               <main className="flex-1 p-6">
         <h2 className="text-3xl font-bold mb-6">
           Your Notes
