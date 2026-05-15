@@ -7,5 +7,18 @@ async getAll() {
     const note = Object.values(result)
 
     return note
+},
+async create(noteData){
+    const respose = await fetch(baseUrl,{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(noteData)
+    })
+
+    const result = respose.json()
+
+    return result
 }
 }
