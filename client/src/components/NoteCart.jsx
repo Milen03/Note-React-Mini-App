@@ -1,10 +1,14 @@
-export default function(){
+export default function({
+    _id,
+    title,
+    content
+}){
 
     return(
         <>
         <div className="bg-white border border-zinc-300 p-5 rounded-2xl shadow-md">
             <h3 className="text-xl font-semibold mb-4">
-              React Notes
+              {title}
             </h3>
 
             <div className="flex gap-3">
