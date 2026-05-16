@@ -20,5 +20,11 @@ async create(noteData){
     const result = respose.json()
 
     return result
+},
+async getOne(noteId){
+    const respose = await fetch(`${baseUrl}/${noteId}`)
+    const result = await respose.json()
+
+    return result
 }
 }
