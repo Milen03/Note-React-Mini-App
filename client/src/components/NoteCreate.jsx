@@ -64,7 +64,7 @@ export default function({
 
                 <button
                     type="button"
-                    className="flex-1 bg-zinc-200 py-3 rounded-xl hover:bg-zinc-300 transition"
+                    className="flex-1 bg-zinc-200 py-3 rounded-xl hover:bg-red-400 transition"
                  onClick={onClose}>
                     Cancel
                 </button>
