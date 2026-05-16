@@ -3,11 +3,13 @@ import nodeServices from "../services/nodeServices"
 
 import NoteCart from "./NoteCart"
 import Sidebar from "./Sidebar"
+import NoteDetails from "./NoteDetails"
 
 export default function NotesSection(){
 
     const [notes,setNotes] = useState([])
 
+    const [noteIdDetails,setNodeIdDetails] = useState(null)
 
     useEffect(()=>{
         nodeServices.getAll()
@@ -28,10 +30,25 @@ export default function NotesSection(){
 
     }
 
+    const nodeDetailsClickHandler = (noteId) =>{
+        setNodeIdDetails(noteId)
+    }
+
+     const nodeDetailsCloseHandler = () =>{
+        setNodeIdDetails(null)
+    }
+
+
     return (
         <>
         <Sidebar
         onSave={saveCreateNodeClickHandler}/>
+
+        {noteIdDetails && <NoteDetails
+        noteId={noteIdDetails}
+        onClose={nodeDetailsCloseHandler}
+        {...notes}
+        />}
               <main className="flex-1 p-6">
         <h2 className="text-3xl font-bold mb-6">
           Your Notes
@@ -42,6 +59,7 @@ export default function NotesSection(){
           {/* Note Card */}
          {notes.map(note => <NoteCart
          key={note._id}
+         onDetailsClick={nodeDetailsClickHandler}
          {...note}
          />)}
 

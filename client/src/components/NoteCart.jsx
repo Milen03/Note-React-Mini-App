@@ -1,7 +1,8 @@
 export default function({
     _id,
     title,
-    content
+    content,
+    onDetailsClick
 }){
 
     return(
@@ -12,7 +13,8 @@ export default function({
             </h3>
 
             <div className="flex gap-3">
-              <button className="flex-1 bg-blue-500 text-white py-2 rounded-xl hover:bg-blue-600 transition">
+              <button className="flex-1 bg-blue-500 text-white py-2 rounded-xl hover:bg-blue-600 transition"
+              onClick={() => onDetailsClick(_id)}>
                 View
               </button>
 
