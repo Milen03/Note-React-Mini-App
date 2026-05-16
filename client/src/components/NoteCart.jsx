@@ -2,7 +2,8 @@ export default function({
     _id,
     title,
     content,
-    onDetailsClick
+    onDetailsClick,
+    onDeleteClick
 }){
 
     return(
@@ -22,7 +23,8 @@ export default function({
                 Edit
               </button>
 
-              <button className="flex-1 bg-red-500 text-white py-2 rounded-xl hover:bg-red-600 transition">
+              <button className="flex-1 bg-red-500 text-white py-2 rounded-xl hover:bg-red-600 transition"
+              onClick={() => onDeleteClick(_id)}>
                 Delete
               </button>
             </div>

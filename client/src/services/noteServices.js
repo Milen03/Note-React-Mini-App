@@ -26,5 +26,15 @@ async getOne(noteId){
     const result = await respose.json()
 
     return result
+},
+
+async delete(noteId){
+    const response = await fetch(`${baseUrl}/${noteId}`,{
+        method:'DELETE'
+    })
+
+    const result = await response.json
+
+    return result
 }
 }

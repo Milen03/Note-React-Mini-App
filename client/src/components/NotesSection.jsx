@@ -1,53 +1,78 @@
 import { useEffect, useState } from "react"
-import nodeServices from "../services/nodeServices"
+import noteServices from "../services/noteServices"
 
 import NoteCart from "./NoteCart"
 import Sidebar from "./Sidebar"
 import NoteDetails from "./NoteDetails"
+import NoteDelete from "./NoteDelete"
 
 export default function NotesSection(){
 
     const [notes,setNotes] = useState([])
 
-    const [noteIdDetails,setNodeIdDetails] = useState(null)
+    const [noteIdDetails,setNoteIdDetails] = useState(null)
+
+    const [noteIdDelete,setNoteDelete] = useState(null)
 
     useEffect(()=>{
-        nodeServices.getAll()
+        noteServices.getAll()
         .then(result =>{
             setNotes(result)
         })
     },[])
 
-    const saveCreateNodeClickHandler = async (e) =>{
+    const saveCreateNoteClickHandler = async (e) =>{
         e.preventDefault()
 
         const formData = new FormData(e.target)
         const noteData = Object.fromEntries(formData)
 
-        const newNote = await nodeServices.create(noteData)
+        const newNote = await noteServices.create(noteData)
 
         setNotes(state =>[...state,newNote])
 
     }
 
-    const nodeDetailsClickHandler = (noteId) =>{
-        setNodeIdDetails(noteId)
+    const noteDetailsClickHandler = (noteId) =>{
+        setNoteIdDetails(noteId)
     }
 
-     const nodeDetailsCloseHandler = () =>{
-        setNodeIdDetails(null)
+     const noteDetailsCloseHandler = () =>{
+        setNoteIdDetails(null)
     }
 
+    const noteDeleteClickHandler = (nodeId) =>{
+        setNoteDelete(nodeId)
+    }
+
+    const noteDeleteCloseHandler = () =>{
+        setNoteDelete(null)
+    }
+
+    const noteDeleteHandler = async () =>{
+      await noteServices.delete(noteIdDelete)
+
+      setNotes(state =>state.filter(note => note._id !== noteIdDelete))
+
+      setNoteDelete(null)
+        
+    }
 
     return (
         <>
         <Sidebar
-        onSave={saveCreateNodeClickHandler}/>
+        onSave={saveCreateNoteClickHandler}/>
 
         {noteIdDetails && <NoteDetails
         noteId={noteIdDetails}
-        onClose={nodeDetailsCloseHandler}
+        onClose={noteDetailsCloseHandler}
+        onDeleteClick={noteDeleteClickHandler}
         {...notes}
+        />}
+
+        {noteIdDelete && <NoteDelete
+        onClose={noteDeleteCloseHandler}
+        onDelete={noteDeleteHandler}
         />}
               <main className="flex-1 p-6">
         <h2 className="text-3xl font-bold mb-6">
@@ -59,7 +84,8 @@ export default function NotesSection(){
           {/* Note Card */}
          {notes.map(note => <NoteCart
          key={note._id}
-         onDetailsClick={nodeDetailsClickHandler}
+         onDetailsClick={noteDetailsClickHandler}
+         onDeleteClick={noteDeleteClickHandler}
          {...note}
          />)}
 

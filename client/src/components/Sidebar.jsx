@@ -1,5 +1,5 @@
 import { useState } from "react"
-import nodeServices from "../services/nodeServices"
+import noteServices from "../services/noteServices"
 import NoteCreate from "./NoteCreate"
 
 export default function({

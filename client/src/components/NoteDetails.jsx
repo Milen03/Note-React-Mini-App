@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react"
-import nodeServices from "../services/nodeServices"
+import noteServices from "../services/noteServices"
 
 export default function NoteDetails({
     noteId,
     onClose,
     title,
-    content
+    content,
+    onDeleteClick
 }) {
 
-    const [node,setNode] = useState({})
+    const [note,setNote] = useState({})
 
     useEffect(()=>{
-        nodeServices.getOne(noteId)
+        noteServices.getOne(noteId)
         .then(result =>{
-            setNode(result)
+            setNote(result)
         } )
     },[noteId])
 
@@ -45,7 +46,7 @@ export default function NoteDetails({
                         </h3>
 
                         <div className="bg-zinc-100 p-4 rounded-xl text-xl font-semibold">
-                            {node.title}
+                            {note.title}
                         </div>
                     </div>
 
@@ -56,7 +57,7 @@ export default function NoteDetails({
                         </h3>
 
                         <div className="bg-zinc-100 p-4 rounded-xl min-h-[200px]">
-                           {node.content}
+                           {note.content}
                         </div>
                     </div>
 
@@ -67,7 +68,8 @@ export default function NoteDetails({
                             Edit
                         </button>
 
-                        <button className="flex-1 bg-red-500 text-white py-3 rounded-xl hover:bg-red-600 transition">
+                        <button className="flex-1 bg-red-500 text-white py-3 rounded-xl hover:bg-red-600 transition"
+                        onClick={() => onDeleteClick(note.noteId)}>
                             Delete
                         </button>
 
