@@ -3,10 +3,12 @@ import noteServices from "../services/noteServices"
 
 export default function NoteDetails({
     noteId,
+    _id,
     onClose,
     title,
     content,
-    onDeleteClick
+    onDeleteClick,
+    onEditClick
 }) {
 
     const [note,setNote] = useState({})
@@ -64,7 +66,8 @@ export default function NoteDetails({
                     {/* Buttons */}
                     <div className="flex gap-4 pt-2">
 
-                        <button className="flex-1 bg-yellow-500 text-white py-3 rounded-xl hover:bg-yellow-600 transition">
+                        <button className="flex-1 bg-yellow-500 text-white py-3 rounded-xl hover:bg-yellow-600 transition"
+                        onClick={() => onEditClick(note._id)}>
                             Edit
                         </button>
 

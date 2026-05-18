@@ -3,7 +3,9 @@ export default function({
     title,
     content,
     onDetailsClick,
-    onDeleteClick
+    onDeleteClick,
+    onEditClick
+
 }){
 
     return(
@@ -19,7 +21,8 @@ export default function({
                 View
               </button>
 
-              <button className="flex-1 bg-yellow-500 text-white py-2 rounded-xl hover:bg-yellow-600 transition">
+              <button className="flex-1 bg-yellow-500 text-white py-2 rounded-xl hover:bg-yellow-600 transition"
+              onClick={() => onEditClick(_id)}>
                 Edit
               </button>
 

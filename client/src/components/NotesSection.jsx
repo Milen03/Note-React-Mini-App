@@ -5,6 +5,8 @@ import NoteCart from "./NoteCart"
 import Sidebar from "./Sidebar"
 import NoteDetails from "./NoteDetails"
 import NoteDelete from "./NoteDelete"
+import NoteCreate from "./NoteCreate"
+import NoteEdit from "./NoteEdit"
 
 export default function NotesSection(){
 
@@ -13,6 +15,8 @@ export default function NotesSection(){
     const [noteIdDetails,setNoteIdDetails] = useState(null)
 
     const [noteIdDelete,setNoteDelete] = useState(null)
+
+    const [noteIdEdit,setNoteEdit] = useState(null)
 
     useEffect(()=>{
         noteServices.getAll()
@@ -58,6 +62,29 @@ export default function NotesSection(){
         
     }
 
+    const noteEditClickHandler = (noteId) =>{
+        setNoteEdit(noteId)
+    }
+
+    const  noteEditCloseHandler = () =>{
+        setNoteEdit(null)
+    }
+
+    const saveEditNoteClickHandler = async (e) =>{
+        const noteId = noteIdEdit
+
+        e.preventDefault()
+
+        const formData = new FormData(e.target)
+        const noteData = Object.fromEntries(formData)
+
+        const updateNote = await noteServices.update(noteId,noteData)
+
+        setNotes(state => state.map(note => note._id === noteId ? updateNote : note))
+
+        setNoteEdit(null)
+    }
+
     return (
         <>
         <Sidebar
@@ -67,12 +94,20 @@ export default function NotesSection(){
         noteId={noteIdDetails}
         onClose={noteDetailsCloseHandler}
         onDeleteClick={noteDeleteClickHandler}
+        onEditClick={noteEditClickHandler}
         {...notes}
         />}
 
         {noteIdDelete && <NoteDelete
         onClose={noteDeleteCloseHandler}
         onDelete={noteDeleteHandler}
+        />}
+
+        {noteIdEdit && <NoteEdit
+        noteId={noteIdEdit}
+        onClose={noteEditCloseHandler}
+        onEdit={saveEditNoteClickHandler}
+        {...notes}
         />}
               <main className="flex-1 p-6">
         <h2 className="text-3xl font-bold mb-6">
@@ -86,6 +121,7 @@ export default function NotesSection(){
          key={note._id}
          onDetailsClick={noteDetailsClickHandler}
          onDeleteClick={noteDeleteClickHandler}
+         onEditClick={noteEditClickHandler}
          {...note}
          />)}
 

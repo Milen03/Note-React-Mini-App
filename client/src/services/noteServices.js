@@ -43,7 +43,7 @@ async delete(noteId){
              headers:{
                 'Content-Type': 'application/json'
              },
-             body:JSON.stringify(postData)
+             body:JSON.stringify(noteData)
         })
 
         const result = await response.json()
