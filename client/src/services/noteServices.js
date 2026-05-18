@@ -36,5 +36,18 @@ async delete(noteId){
     const result = await response.json
 
     return result
-}
+},
+ async update(noteId,noteData){
+        const response = await fetch(`${baseUrl}/${noteId}`,{
+             method:'PUT',
+             headers:{
+                'Content-Type': 'application/json'
+             },
+             body:JSON.stringify(postData)
+        })
+
+        const result = await response.json()
+
+        return result
+    }
 }
