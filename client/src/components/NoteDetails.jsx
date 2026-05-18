@@ -69,7 +69,7 @@ export default function NoteDetails({
                         </button>
 
                         <button className="flex-1 bg-red-500 text-white py-3 rounded-xl hover:bg-red-600 transition"
-                        onClick={() => onDeleteClick(note.noteId)}>
+                        onClick={() => onDeleteClick(note._id)}>
                             Delete
                         </button>
 
