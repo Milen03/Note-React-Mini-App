@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import noteServices from "../services/noteServices"
 
 import NoteCart from "./NoteCart"
-import Sidebar from "./Sidebar"
 import NoteDetails from "./NoteDetails"
 import NoteDelete from "./NoteDelete"
 import NoteCreate from "./NoteCreate"
@@ -20,7 +19,7 @@ export default function NotesSection() {
 
     const [noteIdEdit, setNoteEdit] = useState(null)
 
-    const [sidebar, setSidebar] = useState(true)
+    const [sidebar, setSidebar] = useState(false)
 
     useEffect(() => {
         noteServices.getAll()
