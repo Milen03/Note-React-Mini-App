@@ -12,6 +12,8 @@ export default function NotesSection() {
 
     const [notes, setNotes] = useState([])
 
+    const [showCreate,setShowCreate] = useState(false)
+
     const [noteIdDetails, setNoteIdDetails] = useState(null)
 
     const [noteIdDelete, setNoteDelete] = useState(null)
@@ -26,6 +28,7 @@ export default function NotesSection() {
                 setNotes(result)
             })
     }, [])
+     
 
     const saveCreateNoteClickHandler = async (e) => {
         e.preventDefault()
@@ -37,6 +40,7 @@ export default function NotesSection() {
 
         setNotes(state => [...state, newNote])
 
+        setSidebar(false)
     }
 
     const noteDetailsClickHandler = (noteId) => {
@@ -98,19 +102,18 @@ export default function NotesSection() {
 
     return (
         <>
-            {sidebar ? (
-                <Sidebar
-                    onSave={saveCreateNoteClickHandler}
-                    onClose={sidebarCloseHandler}
-                />
-            ) : (
+
+        {sidebar && <NoteCreate
+          onClose={sidebarCloseHandler}
+          onSave={saveCreateNoteClickHandler}/>}
+            
                 <button
                     className="m-4 w-10 h-10 flex items-center justify-center bg-zinc-900 text-white rounded-xl hover:opacity-90 transition"
                     onClick={sidebarClickHandler}
                 >
-                    ☰
+                    +
                 </button>
-            )}
+            
 
             {noteIdDetails && <NoteDetails
                 noteId={noteIdDetails}
